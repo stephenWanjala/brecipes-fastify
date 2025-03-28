@@ -1,0 +1,25 @@
+{
+  "name": "user-auth-api",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@fastify/jwt": "^7.2.4",
+    "@fastify/rate-limit": "^8.0.3",
+    "bcryptjs": "^2.4.3",
+    "fastify": "^4.25.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@prisma/client": "^6.5.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20.10.5",
+    "@types/uuid": "^9.0.7",
+    "prisma": "^6.5.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
