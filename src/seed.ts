@@ -14,6 +14,9 @@ export default async function seedRecipes() {
         const recipes = JSON.parse(rawData) as any[];
 
         const adminId = process.env.ADMIN_ID;
+        if (!adminId) {
+            throw new Error('ADMIN_ID environment variable is required for seeding recipes');
+        }
 
         const recipesToCreate = recipes.map((recipe) => ({
             title: recipe.title,
