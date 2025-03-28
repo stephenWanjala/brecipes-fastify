@@ -3,7 +3,15 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// Middleware to verify API key
+/**
+ * Validates the provided API key by checking if it exists in the database.
+ *
+ * If no API key is provided, the function immediately returns false. Otherwise, it queries the database
+ * for a matching API key and returns true if found.
+ *
+ * @param apiKey - The API key to verify; if undefined, the API key is considered invalid.
+ * @returns A promise that resolves to true if the API key exists, or false otherwise.
+ */
 async function verifyApiKey(apiKey: string | undefined): Promise<boolean> {
     if (!apiKey) return false;
 
@@ -15,6 +23,14 @@ async function verifyApiKey(apiKey: string | undefined): Promise<boolean> {
     return !!key;
 }
 
+/**
+ * Registers recipe-related routes on the provided Fastify instance.
+ *
+ * This function sets up endpoints for retrieving, searching, creating, seeding, updating, and deleting recipes.
+ * It applies a rate limiting plugin (limiting to 100 requests per minute) and a pre-handler hook that authenticates
+ * clients by verifying an API key (from the "x-api-key" header) or a JWT token. Endpoints modifying data are restricted
+ * to users with an ADMIN role.
+ */
 export async function recipeRoutes(fastify: FastifyInstance) {
     // Apply rate limiting to all recipe routes
     fastify.register(import('@fastify/rate-limit'), {
