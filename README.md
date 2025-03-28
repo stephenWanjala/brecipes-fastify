@@ -12,7 +12,9 @@ A RESTful API built with Fastify, TypeScript, and Prisma for managing recipes. T
 - Batch recipe seeding support
 - PostgreSQL database with Prisma ORM
 - TypeScript support
-
+## TODOS:
+- Add UI and API Documentation
+- Configure & add Turbo repo support
 ## Prerequisites
 
 - Node.js (v14 or higher)
