@@ -2,7 +2,8 @@ import Fastify from 'fastify';
 import jwt from '@fastify/jwt';
 import { userRoutes } from './routes/user.routes';
 import { apiKeyRoutes } from './routes/apikey.routes';
-import { recipeRoutes } from './routes/recipe.routes';
+import { recipeRoutes } from './recipe.routes';
+import seedRecipes from "./seed";
 
 const fastify = Fastify({
   logger: true
@@ -27,6 +28,7 @@ const start = async () => {
   try {
     await fastify.listen({ port: 3000, host: '0.0.0.0' });
     console.log('Server is running on port 3000');
+    // await seedRecipes()
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
