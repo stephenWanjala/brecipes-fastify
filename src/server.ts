@@ -2,8 +2,7 @@ import Fastify from 'fastify';
 import jwt from '@fastify/jwt';
 import { userRoutes } from './routes/user.routes';
 import { apiKeyRoutes } from './routes/apikey.routes';
-import { recipeRoutes } from './recipe.routes';
-import seedRecipes from "./seed";
+import { recipeRoutes } from './routes/recipe.routes';
 
 const fastify = Fastify({
   logger: true
