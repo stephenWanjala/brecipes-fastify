@@ -4,6 +4,15 @@ import * as path from 'path';
 
 const prisma = new PrismaClient();
 
+/**
+ * Seeds the database with recipes from a JSON file.
+ *
+ * This asynchronous function reads recipe data from a "recipes.json" file located in the same directory,
+ * transforms each recipe to include the necessary fields and associates it with an administrator using the
+ * ADMIN_ID environment variable, and clears existing recipes from the database. It then inserts the new recipes
+ * in batches of 1000 using Prisma's createMany method with duplicate skipping enabled. Progress and errors
+ * encountered during the process are logged, and the Prisma client is disconnected upon completion.
+ */
 export default async function seedRecipes() {
     try {
         console.log('Seeding recipes...');
