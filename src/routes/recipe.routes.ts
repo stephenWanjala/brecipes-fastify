@@ -67,18 +67,24 @@ export async function recipeRoutes(fastify: FastifyInstance) {
   fastify.get('/', async (request, reply) => {
     try {
       const {
-        page = 1,
-        limit = 10,
+        page: pageQuery,
+        limit: limitQuery,
         cuisine,
         title,
       } = request.query as {
-        page?: number;
-        limit?: number;
+        page?: string;
+        limit?: string;
         cuisine?: string;
         title?: string;
       };
 
-      const skip = (page - 1) * limit;
+      const page = parseInt(pageQuery ?? '1', 10);
+      const limit = parseInt(limitQuery ?? '10', 10);
+
+
+      const validPage = isNaN(page) || page < 1 ? 1 : page;
+      const validLimit = isNaN(limit) || limit < 1 ? 10 : limit;
+      const skip = (validPage - 1) * validLimit;
       const where: any = {};
 
       if (cuisine) {
@@ -93,7 +99,7 @@ export async function recipeRoutes(fastify: FastifyInstance) {
         prisma.recipe.findMany({
           where,
           skip,
-          take: limit,
+          take: validLimit,
           include: {
             createdBy: {
               select: {
