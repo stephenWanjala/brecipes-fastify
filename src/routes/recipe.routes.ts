@@ -79,11 +79,11 @@ export async function recipeRoutes(fastify: FastifyInstance) {
       };
 
       const page = parseInt(pageQuery ?? '1', 10);
-      const limit = parseInt(limitQuery ?? '10', 10);
+      const limit = parseInt(limitQuery ?? '20', 10);
 
 
       const validPage = isNaN(page) || page < 1 ? 1 : page;
-      const validLimit = isNaN(limit) || limit < 1 ? 10 : limit;
+      const validLimit = isNaN(limit) || limit < 1 ? 20 : limit;
       const skip = (validPage - 1) * validLimit;
       const where: any = {};
 
@@ -149,7 +149,7 @@ export async function recipeRoutes(fastify: FastifyInstance) {
   // Search recipes
   fastify.get('/search', async (request, reply) => {
     try {
-      const { q, page = 1, limit = 10 } = request.query as {
+      const { q, page = 1, limit = 20 } = request.query as {
         q: string;
         page?: number;
         limit?: number;
@@ -207,10 +207,9 @@ export async function recipeRoutes(fastify: FastifyInstance) {
   // Get single recipe
   fastify.get('/:id', async (request, reply) => {
     try {
-      const { id } = request.params as { id: string };
-      const intId =parseInt(id)
+      const { id } = request.params as { id: number };
       const recipe = await prisma.recipe.findUnique({
-        where: { id:intId },
+        where: { id },
         include: {
           createdBy: {
             select: {
@@ -338,7 +337,7 @@ export async function recipeRoutes(fastify: FastifyInstance) {
         return reply.status(403).send({ error: 'Access denied' });
       }
 
-      const { id } = request.params as { id: string };
+      const { id } = request.params as { id: number };
       const recipeData = request.body as {
         title?: string;
         description?: string;
@@ -355,7 +354,7 @@ export async function recipeRoutes(fastify: FastifyInstance) {
       };
 
       const recipe = await prisma.recipe.update({
-        where: { id:parseInt(id) },
+        where: { id:id },
         data: recipeData,
       });
 
@@ -376,9 +375,9 @@ export async function recipeRoutes(fastify: FastifyInstance) {
         return reply.status(403).send({ error: 'Access denied' });
       }
 
-      const { id } = request.params as { id: string };
+      const { id } = request.params as { id: number };
       await prisma.recipe.delete({
-        where: { id:parseInt(id) },
+        where: { id:id },
       });
 
       return reply.status(204).send();
