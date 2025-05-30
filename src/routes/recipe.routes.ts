@@ -208,8 +208,9 @@ export async function recipeRoutes(fastify: FastifyInstance) {
   fastify.get('/:id', async (request, reply) => {
     try {
       const { id } = request.params as { id: string };
+      const intId =parseInt(id)
       const recipe = await prisma.recipe.findUnique({
-        where: { id },
+        where: { id:intId },
         include: {
           createdBy: {
             select: {
@@ -354,7 +355,7 @@ export async function recipeRoutes(fastify: FastifyInstance) {
       };
 
       const recipe = await prisma.recipe.update({
-        where: { id },
+        where: { id:parseInt(id) },
         data: recipeData,
       });
 
@@ -377,7 +378,7 @@ export async function recipeRoutes(fastify: FastifyInstance) {
 
       const { id } = request.params as { id: string };
       await prisma.recipe.delete({
-        where: { id },
+        where: { id:parseInt(id) },
       });
 
       return reply.status(204).send();

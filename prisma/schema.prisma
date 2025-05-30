@@ -34,7 +34,7 @@ model ApiKey {
 }
 
 model Recipe {
-  id              String   @id @default(uuid())
+  id              Int      @id @default(autoincrement())
   title           String
   description     String
   cuisine         String
