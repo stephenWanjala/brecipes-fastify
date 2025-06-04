@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Copy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from "sonner"
 
 const examples = {
   javascript: `// Using fetch API
@@ -74,14 +74,11 @@ axios.get(url, {
 
 export default function CodeExample() {
   const [language, setLanguage] = useState('javascript');
-  const { toast } = useToast();
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(examples[language as keyof typeof examples]);
-    toast({
-      title: "Code copied!",
-      description: "Example code has been copied to clipboard.",
-    });
+  
+    toast.success("Example code has been copied to clipboard.");
   };
 
   return (
