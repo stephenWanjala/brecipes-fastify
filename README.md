@@ -63,6 +63,8 @@ To develop all apps and packages, navigate to the `brecipes-fastify` directory a
 cd brecipes-fastify
 npm run dev
 ```
+### Sample Android Client Using The API  👇
+👉 [Checkout The sample Here](https://github.com/stephenWanjala/BRecipesAndroid.git)
 
 ### Remote Caching
 
