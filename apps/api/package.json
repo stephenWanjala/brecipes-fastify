@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "prisma generate && tsc",
+    "build": "tsc ",
     "generate": "prisma generate",
-    "start": "tsc && node dist/server.js"
+    "start": "tsc  && node dist/server.js"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.1",

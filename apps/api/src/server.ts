@@ -43,8 +43,9 @@ fastify.get('/health', async () => {
 });
 
 const start = async () => {
+  let port = process.env.PORT || 3000;
   try {
-    await fastify.listen({ port: 3000, host: '0.0.0.0' });
+    await fastify.listen({ port: parseInt(String(port)), host: '0.0.0.0' });
     console.log('Server is running on port 3000');
     // await seedRecipes()
   } catch (err) {
