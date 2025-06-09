@@ -154,7 +154,7 @@ export default function ApiOverview() {
               </div>
               
               <div className="text-center mt-8">
-                <Link href="/auth/register">
+                <Link href="/dashboard">
                   <Button className="font-medium">
                     Get Your API Key <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>

@@ -14,7 +14,7 @@ export default function CTA() {
         </p>
         
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 max-w-2xl mx-auto">
-          <Link href="/auth/register">
+          <Link href="/dashboard">
             <Button 
               className="w-full flex items-center justify-center gap-2 py-6 text-lg" 
               size="lg"
