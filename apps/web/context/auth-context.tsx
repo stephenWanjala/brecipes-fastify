@@ -42,19 +42,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   async function login(email: string, password: string) {
     setLoading(true);
     try {
-      // This would be an actual API call
-      // const response = await fetch('/api/users/login', {...})
-      
-      // For now, simulate a successful login
-      const mockUser: User = {
-        id: '123456',
-        email: email,
-        role: 'USER',
-        apiKey: 'sample-api-key-12345',
-      };
-      
-      setUser(mockUser);
-      localStorage.setItem('user', JSON.stringify(mockUser));
+      const response = await fetch("https://brecipes-fastify.onrender.com/api/users/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+      const loggedInUser: User = await response.json();
+      setUser(loggedInUser);
+      localStorage.setItem('user', JSON.stringify(loggedInUser));
+      console.log('Login successful:', loggedInUser);
     } catch (error) {
       console.error('Login failed:', error);
       throw error;
@@ -66,19 +67,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   async function register(email: string, password: string) {
     setLoading(true);
     try {
-      // This would be an actual API call
-      // const response = await fetch('/api/users/register', {...})
-      
-      // For now, simulate a successful registration
-      const mockUser: User = {
-        id: '123456',
-        email: email,
-        role: 'USER',
-        apiKey: 'sample-api-key-12345',
-      };
-      
-      setUser(mockUser);
-      localStorage.setItem('user', JSON.stringify(mockUser));
+      const response = await fetch("https://brecipes-fastify.onrender.com/api/users/register", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
+      const newUser: User = await response.json();
+      setUser(newUser);
+      localStorage.setItem('user', JSON.stringify(newUser));
+      console.log('Registration successful:', newUser);
     } catch (error) {
       console.error('Registration failed:', error);
       throw error;
