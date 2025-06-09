@@ -29,7 +29,7 @@ export default function HeroSection() {
                 <div
                     className="mt-10 flex flex-col gap-4 sm:flex-row opacity-0 fade-in-up delay-3"
                 >
-                    <Link href="/docs">
+                    <Link href="/docs" aria-label="Explore API documentation">
                         <Button size="lg" className="px-8 font-medium">
                             Explore API
                             <ChevronRight className="ml-2 h-4 w-4" />
