@@ -55,7 +55,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const loggedInUser: User = await response.json();
       setUser(loggedInUser);
       localStorage.setItem('user', JSON.stringify(loggedInUser));
-      console.log('Login successful:', loggedInUser);
     } catch (error) {
       console.error('Login failed:', error);
       throw error;
@@ -80,7 +79,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const newUser: User = await response.json();
       setUser(newUser);
       localStorage.setItem('user', JSON.stringify(newUser));
-      console.log('Registration successful:', newUser);
     } catch (error) {
       console.error('Registration failed:', error);
       throw error;

@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 
-import PropTypes from "prop-types";
+
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { useAuth } from "@/context/auth-context";
@@ -20,9 +20,5 @@ function HeroButton({ text, route }: { text: string; route: string }) {
     );
 }
 
-HeroButton.propTypes = {
-    text: PropTypes.string.isRequired,
-    route: PropTypes.string.isRequired,
-};
 
 export default HeroButton;
