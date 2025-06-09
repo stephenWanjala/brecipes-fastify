@@ -97,19 +97,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   async function regenerateApiKey(): Promise<string> {
     setLoading(true);
     try {
-      // This would be an actual API call
-      // const response = await fetch('/api/apikey/regenerate', {...})
+      // // This would be an actual API call
+      // // const response = await fetch('/api/apikey/regenerate', {...})
+      //
+      // // For now, simulate a successful key regeneration
+      // const newApiKey = 'new-api-key-' + Math.random().toString(36).substring(2, 10);
+      //
+      // if (user) {
+      //   const updatedUser = { ...user, apiKey: newApiKey };
+      //   setUser(updatedUser);
+      //   localStorage.setItem('user', JSON.stringify(updatedUser));
+      // }
       
-      // For now, simulate a successful key regeneration
-      const newApiKey = 'new-api-key-' + Math.random().toString(36).substring(2, 10);
-      
-      if (user) {
-        const updatedUser = { ...user, apiKey: newApiKey };
-        setUser(updatedUser);
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-      }
-      
-      return newApiKey;
+      return "newApiKey";
     } catch (error) {
       console.error('API key regeneration failed:', error);
       throw error;

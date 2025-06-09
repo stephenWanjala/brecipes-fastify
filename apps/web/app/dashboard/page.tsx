@@ -46,6 +46,7 @@ export default function DashboardPage() {
     try {
       setIsRegenerating(true);
       const newApiKey = await regenerateApiKey();
+      console.log(newApiKey);
       toast.success("API key regenerated successfully!", {
         duration: 2000,
         description: "Your new API key is now visible.",

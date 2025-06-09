@@ -133,7 +133,7 @@ export default function DocsPage() {
                   Create an account to get started with your free API key
                 </p>
                 <Button asChild size="sm">
-                  <a href="/auth/register" className="flex items-center">
+                  <a href="/dashboard" className="flex items-center">
                     Get API Key <Key className="ml-2 h-3 w-3" />
                   </a>
                 </Button>
@@ -222,7 +222,7 @@ export default function DocsPage() {
                   </pre>
                   <p>
                     You can obtain your API key by{" "}
-                    <a href="/auth/register" className="text-primary hover:underline">
+                    <a href="/dashboard" className="text-primary hover:underline">
                       registering
                     </a>{" "}
                     for an account.

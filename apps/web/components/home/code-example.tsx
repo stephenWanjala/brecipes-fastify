@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Copy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from "sonner"
