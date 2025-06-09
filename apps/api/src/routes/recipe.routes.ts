@@ -108,7 +108,7 @@ export async function recipeRoutes(fastify: FastifyInstance) {
             },
           },
           orderBy: {
-            title: 'asc',
+            id: 'asc',
           },
         }),
         prisma.recipe.count({ where }),
