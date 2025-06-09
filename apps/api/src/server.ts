@@ -4,6 +4,7 @@ import { userRoutes } from './routes/user.routes';
 import { apiKeyRoutes } from './routes/apikey.routes';
 import { recipeRoutes } from './routes/recipe.routes';
 import seedRecipes from "./seed";
+import cors from "@fastify/cors"
 
 const fastify = Fastify({
   logger: true
@@ -13,7 +14,12 @@ const fastify = Fastify({
 fastify.register(jwt, {
   secret: process.env.JWT_SECRET || 'SomeKey'
 });
-
+fastify.register(cors, {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key'],
+  credentials: true
+});
 fastify.addHook('onRequest', async (request, reply) => {
   // @ts-ignore
   request.startTime = process.hrtime();
