@@ -24,8 +24,7 @@ export async function registerUsageTracker(fastify: FastifyInstance) {
         console.log(`[${request.method}] ${request.url} - ${ms.toFixed(2)} ms`);
 
         try {
-            // Only track API routes (e.g., /api/recipes, adjust as needed)
-            if (!request.url.startsWith("/api/recipes") && !request.url.startsWith("/api/users") && !request.url.startsWith("/api/apikey") && !request.url.startsWith("/api/usage")) {
+            if (!request.url.includes("/api/recipes") && !request.url.startsWith("/api/users") && !request.url.startsWith("/api/apikey") && !request.url.startsWith("/api/usage")) {
                 return;
             }
 
