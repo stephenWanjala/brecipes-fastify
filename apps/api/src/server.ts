@@ -34,12 +34,12 @@ fastify.addHook('onResponse', async (request, reply) => {
   console.log(`[${request.method}] ${request.url} - ${ms.toFixed(2)} ms`);
 });
 
+fastify.register(registerUsageTracker);
 // Register routes
 fastify.register(userRoutes, { prefix: '/api/users' });
 fastify.register(apiKeyRoutes, { prefix: '/api/apikey' });
 fastify.register(recipeRoutes, { prefix: '/api/recipes' });
 fastify.register(usageRoutes, { prefix: '/api/usage' });
-fastify.register(registerUsageTracker);
 
 // Health check route
 fastify.get('/health', async () => {
