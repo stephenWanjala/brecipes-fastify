@@ -12,6 +12,10 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Recipe API Documentation',
   description: 'Documentation and management portal for the Recipe API',
+  authors:[{
+    name: "WANJALA STEPHEN",
+    url: "https://wanjalastephen.vercel.app/",
+  }]
 };
 
 export default function RootLayout({
