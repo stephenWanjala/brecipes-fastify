@@ -25,12 +25,29 @@ model User {
 }
 
 model ApiKey {
-  id        String   @id @default(uuid())
-  key       String   @unique
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String     @id @default(uuid())
+  key       String     @unique
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id])
+  apiUsages ApiUsage[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model ApiUsage {
+  id           String   @id @default(uuid())
+  apiKeyId     String
+  apiKey       ApiKey   @relation(fields: [apiKeyId], references: [id])
+  endpoint     String
+  method       String
+  statusCode   Int
+  responseTime Int
+  userAgent    String?
+  ipAddress    String?
+  createdAt    DateTime @default(now())
+
+  @@index([apiKeyId, createdAt])
+  @@index([createdAt])
 }
 
 model Recipe {
