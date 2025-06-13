@@ -5,6 +5,8 @@ import { apiKeyRoutes } from './routes/apikey.routes';
 import { recipeRoutes } from './routes/recipe.routes';
 import seedRecipes from "./seed";
 import cors from "@fastify/cors"
+import {usageRoutes} from "./routes/usage.routes";
+import {registerUsageTracker} from "./routes/usage-tracker";
 
 const fastify = Fastify({
   logger: true
@@ -36,6 +38,8 @@ fastify.addHook('onResponse', async (request, reply) => {
 fastify.register(userRoutes, { prefix: '/api/users' });
 fastify.register(apiKeyRoutes, { prefix: '/api/apikey' });
 fastify.register(recipeRoutes, { prefix: '/api/recipes' });
+fastify.register(usageRoutes, { prefix: '/api/usage' });
+fastify.register(registerUsageTracker);
 
 // Health check route
 fastify.get('/health', async () => {
