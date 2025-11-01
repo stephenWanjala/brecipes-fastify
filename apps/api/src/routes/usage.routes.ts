@@ -87,36 +87,24 @@ export async function usageRoutes(fastify: FastifyInstance) {
                 }),
             ])
 
-            // Calculate usage by day for the last 30 days
-            const dailyUsage = await prisma.apiUsage.groupBy({
-                by: ["createdAt"], // Grouping by date part will require a raw query or more complex logic
-                where: {
-                    apiKeyId: apiKey.id,
-                    createdAt: {
-                        gte: last30Days,
-                    },
-                },
-                _count: {
-                    id: true,
-                },
-                orderBy: {
-                    createdAt: "desc", // Order by the date part
-                },
-            })
+            // Calculate usage by day for the last 30 days using SQL date truncation
+            const rawDaily = await prisma.$queryRaw<{
+                day: Date;
+                requests: bigint;
+            }[]>`
+                SELECT DATE("createdAt") as day,
+                       COUNT(*) as requests
+                FROM "ApiUsage"
+                WHERE "apiKeyId" = ${apiKey.id}
+                  AND "createdAt" >= ${last30Days}
+                GROUP BY DATE("createdAt")
+                ORDER BY day DESC
+            `
 
-            // Manually process dailyUsage to aggregate by date without time
-            const aggregatedDailyUsage: { date: Date; requests: number }[] = dailyUsage.reduce(
-                (acc: { date: Date; requests: number }[], item) => {
-                    const dateOnly = new Date(item.createdAt.getFullYear(), item.createdAt.getMonth(), item.createdAt.getDate());
-                    const existingEntry = acc.find(entry => entry.date.getTime() === dateOnly.getTime());
-
-                    if (existingEntry) {
-                        existingEntry.requests += item._count.id;
-                    } else {
-                        acc.push({ date: dateOnly, requests: item._count.id });
-                    }
-                    return acc;
-                }, []).sort((a, b) => b.date.getTime() - a.date.getTime()); // Sort again to ensure descending order by date
+            const aggregatedDailyUsage: { date: Date; requests: number }[] = rawDaily.map(r => ({
+                date: r.day,
+                requests: Number(r.requests)
+            }))
 
 
             // Usage limits (these could be configurable per plan)

@@ -211,8 +211,29 @@ export default function DashboardPage() {
             <TabsContent value="usage">
               <Card>
                 <CardHeader>
-                  <CardTitle>API Usage</CardTitle>
-                  <CardDescription>Monitor your API request usage for the current billing period</CardDescription>
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <CardTitle>API Usage</CardTitle>
+                      <CardDescription>Monitor your API request usage for the current billing period</CardDescription>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={async () => {
+                        setLoadingStats(true)
+                        try {
+                          const data = await fetchUsageStats()
+                          setUsageStats(data)
+                        } catch (e) {
+                          console.error("Error refreshing usage stats:", e)
+                        } finally {
+                          setLoadingStats(false)
+                        }
+                      }}
+                    >
+                      Refresh
+                    </Button>
+                  </div>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {loadingStats ? (
@@ -237,6 +258,27 @@ export default function DashboardPage() {
                           </span>
                             </div>
                             <Progress value={usageStats.usage.monthly.percentage} className="h-2" />
+                            <div className="flex justify-between text-xs mt-1 text-muted-foreground">
+                              <span>
+                                Remaining: {usageStats.usage.monthly.remaining.toLocaleString()}
+                              </span>
+                              <Badge
+                                variant="outline"
+                                className={
+                                  usageStats.usage.monthly.used >= usageStats.usage.monthly.limit
+                                    ? "text-red-600 border-red-600"
+                                    : usageStats.usage.monthly.percentage >= 80
+                                    ? "text-amber-600 border-amber-600"
+                                    : "text-green-600 border-green-600"
+                                }
+                              >
+                                {usageStats.usage.monthly.used >= usageStats.usage.monthly.limit
+                                  ? "Exceeded"
+                                  : usageStats.usage.monthly.percentage >= 80
+                                  ? "Near limit"
+                                  : "OK"}
+                              </Badge>
+                            </div>
                           </div>
 
                           <div className="space-y-2">
@@ -248,6 +290,27 @@ export default function DashboardPage() {
                           </span>
                             </div>
                             <Progress value={usageStats.usage.daily.percentage} className="h-2" />
+                            <div className="flex justify-between text-xs mt-1 text-muted-foreground">
+                              <span>
+                                Remaining: {usageStats.usage.daily.remaining.toLocaleString()}
+                              </span>
+                              <Badge
+                                variant="outline"
+                                className={
+                                  usageStats.usage.daily.used >= usageStats.usage.daily.limit
+                                    ? "text-red-600 border-red-600"
+                                    : usageStats.usage.daily.percentage >= 80
+                                    ? "text-amber-600 border-amber-600"
+                                    : "text-green-600 border-green-600"
+                                }
+                              >
+                                {usageStats.usage.daily.used >= usageStats.usage.daily.limit
+                                  ? "Exceeded"
+                                  : usageStats.usage.daily.percentage >= 80
+                                  ? "Near limit"
+                                  : "OK"}
+                              </Badge>
+                            </div>
                           </div>
                         </div>
 
@@ -282,6 +345,16 @@ export default function DashboardPage() {
                                 <div className="text-lg font-medium">
                                   {new Date(usageStats.resetDate).toLocaleDateString()}
                                 </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+
+                          <Card>
+                            <CardContent className="p-4 flex items-center">
+                              <BarChart className="h-5 w-5 mr-2 text-blue-600" />
+                              <div>
+                                <div className="text-sm font-medium">Last 30 Days</div>
+                                <div className="text-2xl font-bold">{usageStats.usage.last30Days.toLocaleString()}</div>
                               </div>
                             </CardContent>
                           </Card>
