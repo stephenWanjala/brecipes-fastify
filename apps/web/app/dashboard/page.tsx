@@ -43,6 +43,13 @@ interface UsageStats {
   }>
 }
 
+/**
+ * Renders the user dashboard with API key management, account information, and usage/request statistics.
+ *
+ * Displays the current user's API key with copy and regenerate actions, shows account details, and loads API usage statistics and recent requests. Performs an authentication redirect to the login page when no user is present, copies the API key to the clipboard, invokes API calls to fetch usage statistics, and shows success/error toasts for key regeneration and other operations.
+ *
+ * @returns The Dashboard page React element.
+ */
 export default function DashboardPage() {
   const { user, loading, regenerateApiKey, fetchUsageStats } = useAuth()
   const router = useRouter()

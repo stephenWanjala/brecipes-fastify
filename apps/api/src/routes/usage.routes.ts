@@ -3,6 +3,15 @@ import {PrismaClient} from "@prisma/client"
 
 const prisma = new PrismaClient()
 
+/**
+ * Register usage and analytics HTTP routes and an authentication hook on a Fastify instance.
+ *
+ * Adds a preHandler hook that verifies JWTs and two routes:
+ * - GET /stats: returns the authenticated user's API usage summary, daily aggregates for the last 30 days, recent requests, and quota information.
+ * - GET /analytics: admin-only endpoint that returns site-wide analytics (request totals, unique users, average response time, status code distribution, top endpoints, and hourly distribution) for a specified period.
+ *
+ * @param fastify - The Fastify instance to register hooks and routes on
+ */
 export async function usageRoutes(fastify: FastifyInstance) {
     // Authenticate requests using JWT
     fastify.addHook("preHandler", async (request, reply) => {

@@ -24,12 +24,12 @@ async function verifyApiKey(apiKey: string | undefined): Promise<boolean> {
 }
 
 /**
- * Registers recipe-related routes on the provided Fastify instance.
+ * Register recipe-related HTTP routes and their authentication and rate-limiting hooks on the Fastify instance.
  *
- * This function sets up endpoints for retrieving, searching, creating, seeding, updating, and deleting recipes.
- * It applies a rate limiting plugin (limiting to 100 requests per minute) and a pre-handler hook that authenticates
- * clients by verifying an API key (from the "x-api-key" header) or a JWT token. Endpoints modifying data are restricted
- * to users with an ADMIN role.
+ * Sets up endpoints for listing, searching, retrieving, creating, seeding, updating, and deleting recipes.
+ * Applies a global rate limit of 100 requests per minute and a pre-handler that authenticates requests using either
+ * an API key from the `x-api-key` header (attaching the key record id to the request) or a JWT. Endpoints that
+ * modify data (create, seed, update, delete) require an authenticated user with the `ADMIN` role.
  */
 export async function recipeRoutes(fastify: FastifyInstance) {
   // Apply rate limiting to all recipe routes

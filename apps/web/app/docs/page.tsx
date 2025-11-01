@@ -23,6 +23,13 @@ import {
   AlertTriangle,
 } from "lucide-react";
 
+/**
+ * Render the Recipe API documentation page with navigable sections, endpoint examples, and copy-to-clipboard controls.
+ *
+ * Renders a two-column layout containing a sticky sidebar navigation and the main documentation content (Introduction, Authentication, User endpoints, API key endpoints, Recipe endpoints, and Error Handling). Example request blocks include copy buttons that show a success toast and temporarily toggle a check icon when an example is copied.
+ *
+ * @returns The page's JSX element representing the full documentation UI.
+ */
 export default function DocsPage() {
   const [copiedEndpoint, setCopiedEndpoint] = useState<string | null>(null);
 
