@@ -158,7 +158,7 @@ export default function DocsPage() {
               </p>
               <h3 className="text-xl font-semibold mt-8 mb-3">Base URL</h3>
               <code className="relative rounded bg-slate-100 dark:bg-slate-800 px-3 py-2 font-mono text-sm text-slate-700 dark:text-slate-300 block overflow-auto">
-                https://github.com/stephenWanjala/brecipes-fastify.git
+                  https://brecipes-fastify.onrender.com/api/recipes
               </code>
 
               <h3 className="text-xl font-semibold mt-8 mb-3">Response Format</h3>
