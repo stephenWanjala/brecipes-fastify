@@ -45,7 +45,15 @@ export async function recipeRoutes(fastify: FastifyInstance) {
 
     // Check API key if present
     if (apiKey) {
-      isAuthenticated = await verifyApiKey(apiKey);
+      // Validate API key and attach apiKeyId for downstream usage tracking
+      const keyRecord = await prisma.apiKey.findUnique({
+        where: { key: apiKey },
+        select: { id: true },
+      });
+      if (keyRecord) {
+        (request as any).apiKeyId = keyRecord.id;
+        isAuthenticated = true;
+      }
     }
 
     // If no valid API key, check JWT token
