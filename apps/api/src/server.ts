@@ -23,13 +23,6 @@ fastify.register(cors, {
   credentials: true
 });
 
-// fastify.addHook('onResponse', async (request, reply) => {
-//   // @ts-ignore
-//   const diff = process.hrtime(request.startTime);
-//   const ms = diff[0] * 1000 + diff[1] / 1e6;
-//   console.log(`[${request.method}] ${request.url} - ${ms.toFixed(2)} ms`);
-// });
-
 fastify.register(registerUsageTracker);
 // Register routes
 fastify.register(userRoutes, { prefix: '/api/users' });
