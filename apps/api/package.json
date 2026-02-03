@@ -12,7 +12,7 @@
     "@fastify/jwt": "^9.1.0",
     "@fastify/rate-limit": "^10.2.2",
     "bcryptjs": "^2.4.3",
-    "fastify": "^5.3.2",
+    "fastify": "^5.7.3",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
