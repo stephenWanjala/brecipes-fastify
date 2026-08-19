@@ -52,7 +52,7 @@ To build all apps and packages, navigate to the `brecipes-fastify` directory and
 
 ```sh
 cd brecipes-fastify
-npm run build
+pnpm build
 ```
 
 ### Develop
@@ -61,7 +61,7 @@ To develop all apps and packages, navigate to the `brecipes-fastify` directory a
 
 ```sh
 cd brecipes-fastify
-npm run dev
+pnpm dev
 ```
 ### Sample Android Client Using The API  👇
 👉 [Checkout The sample Here](https://github.com/stephenWanjala/BRecipesAndroid.git)
@@ -77,7 +77,7 @@ By default, Turborepo will cache locally. To enable Remote Caching, you will nee
 
 ```sh
 cd brecipes-fastify
-npx turbo login
+pnpm dlx turbo login
 ```
 
 This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
@@ -85,7 +85,7 @@ This will authenticate the Turborepo CLI with your [Vercel account](https://verc
 Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
 
 ```sh
-npx turbo link
+pnpm dlx turbo link
 ```
 
 ## API Endpoints

@@ -19,14 +19,14 @@ A RESTful API built with Fastify, TypeScript, and Prisma for managing recipes. T
 
 - Node.js (v14 or higher)
 - PostgreSQL database
-- npm or yarn
+- pnpm
 
 ## Setup
 
 1. Clone the repository
 2. Install dependencies:
 ```bash
-npm install
+pnpm install
 ```
 
 3. Set up environment variables in `.env`:
@@ -37,12 +37,12 @@ JWT_SECRET="your-secret-key-here"
 
 4. Run Prisma migrations:
 ```bash
-npx prisma migrate dev
+pnpm exec prisma migrate dev
 ```
 
 5. Start the development server:
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ## API Documentation
@@ -216,12 +216,12 @@ The API returns appropriate HTTP status codes:
 
 Build the project:
 ```bash
-npm run build
+pnpm build
 ```
 
 Start production server:
 ```bash
-npm start
+pnpm start
 ```
 
 ## Database Schema
